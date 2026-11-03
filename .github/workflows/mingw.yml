@@ -43,7 +43,6 @@ jobs:
               mingw-w64-x86_64-sqlite3 ^
               mingw-w64-x86_64-hiredis ^
               mingw-w64-x86_64-postgresql ^
-              mingw-w64-x86_64-libmicrohttpd ^
               git base-devel
         env:
           PATH: C:\msys64\usr\bin
