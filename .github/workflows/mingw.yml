@@ -32,7 +32,7 @@ jobs:
             
       - name: Install dependencies
         run: |
-          C:\msys64\usr\bin\pacman.exe -S --noconfirm ^
+          C:\msys64\usr\bin\pacman.exe -Syu --noconfirm --needed ^
               mingw-w64-x86_64-cmake ^
               mingw-w64-x86_64-make ^
               mingw-w64-x86_64-nsis ^
