@@ -2,10 +2,7 @@ name: MinGW
 
 on:
   push:
-    branches: ["master"]
-    tags: ["4.*"]
-  pull_request:
-    branches: ["master"]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
