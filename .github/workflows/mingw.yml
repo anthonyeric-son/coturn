@@ -102,3 +102,21 @@ jobs:
             ${{ github.workspace }}\build\coturn*.exe
             ${{ github.workspace }}\build\coturn*.md5
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
+
+      - name: Bundle DLLs into install folder
+        shell: C:\msys64\usr\bin\bash.exe -eo pipefail {0}
+        env:
+          MSYSTEM: UCRT64
+          PATH: C:\msys64\ucrt64\bin;C:\msys64\usr\bin
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")/build/install"
+          ls -R
+          for f in bin/*.exe; do ldd "$f"; done \
+            | grep -i '/ucrt64/' | awk '{print $3}' | sort -u \
+            | xargs -r -I{} cp -v {} bin/
+
+      - name: Upload portable build
+        uses: actions/upload-artifact@v4
+        with:
+          name: coturn-windows-portable
+          path: build/install
